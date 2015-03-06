@@ -25,5 +25,9 @@
 	        "Tests\\": "tests/"
         }
     },
+    "bin": [
+		"bin/doctrine-laravel",
+		"bin/doctrine-laravel.php"
+    ],    
     "minimum-stability": "dev"
 }
