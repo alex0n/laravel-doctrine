@@ -1,6 +1,8 @@
 <?php namespace Mitch\LaravelDoctrine\Traits;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\EntityManager;
+
 
 trait Authentication {
 
@@ -27,7 +29,10 @@ trait Authentication {
      * @return mixed
      */
     public function getAuthIdentifier() {
-        return method_exists($this, 'getKeyName') ? $this->getKeyName() : 'id';
+
+        $entityManager = app('Doctrine\ORM\EntityManager');
+
+        return $this->{$entityManager->getClassMetadata(get_class($this))->getSingleIdentifierFieldName()};
     }
 
     /**
@@ -60,6 +65,6 @@ trait Authentication {
      * @return string
      */
     public function getRememberTokenName() {
-        return 'remember_token';
+        return 'rememberToken';
     }
 } 
